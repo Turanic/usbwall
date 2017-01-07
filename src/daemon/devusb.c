@@ -199,7 +199,8 @@ static int hotplug_callback(struct libusb_context *ctx __attribute__((unused)),
 
     return 1;
   }
-  syslog(LOG_INFO, "New device detected : %s\n", device->serial);
+  const char *msg = device->serial ? device->serial : "identification failed";
+  syslog(LOG_INFO, "New device detected : %s\n", msg);
 
   if (!device_is_valid(device))
   {
