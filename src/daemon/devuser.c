@@ -188,6 +188,7 @@ struct linked_list *wait_for_logging()
       break;
     case CLOSED:
       syslog(LOG_INFO, "Connection with PAM closed.");
+      error = 1;
       break;
     case ERROR:
       syslog(LOG_ERR, "Error from accept_user() function.");
@@ -252,7 +253,7 @@ int check_devid(const char *devid, struct linked_list *devids)
 {
   assert(devid && devids);
 
-  syslog(LOG_DEBUG, "Devusb initialized sucessfully");
+  syslog(LOG_DEBUG, "Checking %s devid ...", devid);
 
   int (*compare_function)(const void *, const void *) =
     (int (*)(const void *, const void *))strcmp;
